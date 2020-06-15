@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import Writers from './Writers';
+import NotFound from './errors/404';
 
 
 
@@ -46,7 +47,7 @@ export default class App extends Component {
           <Switch>
             <Route path="/" exact render={() => <div>Home Page</div>} />
             <Route path="/writers" render={props => <Writers {...props} writers={writers} />} />
-            <Route render={() => <h3>Page Not Found</h3>} />
+            <Route component={ NotFound} />
           </Switch>
         </Fragment>
       </Router>
