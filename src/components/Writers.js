@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Link, Route } from 'react-router-dom'
+import { Link, Route, Redirect } from 'react-router-dom'
 import Writer from './Writer'
 
 function Writers({ match: { url }, writers }) {
@@ -10,7 +10,15 @@ function Writers({ match: { url }, writers }) {
 
             </ul>
             <Route path={url} exact render={() => <h3>Please select a writer from above</h3>} />
-            <Route path={`${url}/:writerId`} render={({ match }) => <Writer  {...writers.find(writer => writer.id === match.params.writerId)} />} />
+            <Route path={`${url}/:writerId`} render={({ match }) => {
+                const writer = writers.find(writer => writer.id === match.params.writerId);
+                if (!writer) {
+                    return <Redirect to="/404" />
+                }
+
+                return <Writer {...writer} />
+            }
+            } />
 
         </Fragment>
     )
