@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import Writers from './Writers';
 
 
@@ -42,8 +42,12 @@ export default class App extends Component {
             <li><Link to="/writers">Writers</Link></li>
           </ul>
           <hr />
-          <Route path="/" exact render={() => <div>Home Page</div>} />
-          <Route path="/writers" render={props => <Writers {...props} writers={writers} />} />
+
+          <Switch>
+            <Route path="/" exact render={() => <div>Home Page</div>} />
+            <Route path="/writers" render={props => <Writers {...props} writers={writers} />} />
+            <Route render={() => <h3>Page Not Found</h3>} />
+          </Switch>
         </Fragment>
       </Router>
     )
