@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import {NotFound} from './errors';
 import Writers from './Writers';
-import NotFound from './errors/404';
+
 
 
 
@@ -20,7 +21,7 @@ export default class App extends Component {
 
 
   componentDidMount() {
-    axios('http://localhost:3004/writers/')
+    axios('http://localhost:3004/writers?_embed=texts')
       .then(response => {
         this.setState({ writers: response.data });
       })
