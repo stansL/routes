@@ -1,8 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import {NotFound} from './errors';
 import Writers from './Writers';
+import Layout from './layout/Layout';
 
 
 
@@ -38,21 +39,33 @@ export default class App extends Component {
     const { writers } = this.state;
     return (
       <Router>
-        <Fragment>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/writers">Writers</Link></li>
-          </ul>
-          <hr />
-
+        <Layout >
           <Switch>
             <Route path="/" exact render={() => <div>Home Page</div>} />
             <Route path="/writers" render={props => <Writers {...props} writers={writers} />} />
             <Route component={ NotFound} />
           </Switch>
-        </Fragment>
+        </Layout>
       </Router>
     )
+    // const { writers } = this.state;
+    // return (
+    //   <Router>
+    //     <Fragment>
+    //       <ul>
+    //         <li><Link to="/">Home</Link></li>
+    //         <li><Link to="/writers">Writers</Link></li>
+    //       </ul>
+    //       <hr />
+
+    //       <Switch>
+    //         <Route path="/" exact render={() => <div>Home Page</div>} />
+    //         <Route path="/writers" render={props => <Writers {...props} writers={writers} />} />
+    //         <Route component={ NotFound} />
+    //       </Switch>
+    //     </Fragment>
+    //   </Router>
+    // )
   }
 }
 
